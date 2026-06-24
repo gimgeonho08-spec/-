@@ -185,16 +185,19 @@ export default function App() {
     const fetchSharedPortfolio = async () => {
       try {
         const response = await fetch('/api/portfolio');
-        const cloudData = await response.json();
-        
-        if (cloudData && !cloudData.fallback && cloudData.aboutMe) {
-          const sanitized = sanitizeAndProcessData(cloudData);
-          setData(sanitized);
-          localStorage.setItem('electrical_portfolio_data', JSON.stringify(sanitized));
-          return;
+        if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
+          const cloudData = await response.json();
+          if (cloudData && !cloudData.fallback && cloudData.aboutMe) {
+            const sanitized = sanitizeAndProcessData(cloudData);
+            setData(sanitized);
+            localStorage.setItem('electrical_portfolio_data', JSON.stringify(sanitized));
+            return;
+          }
+        } else {
+          console.warn('API endpoint did not return JSON or was not successful (running on static client like Netlify). Using local storage.');
         }
       } catch (err) {
-        console.warn('Could not contact full-stack server for sync, using local backup:', err);
+        console.warn('Could not contact full-stack server for sync (running on static host like Netlify):', err);
       }
 
       // Local storage hybrid fallback
@@ -245,14 +248,19 @@ export default function App() {
         },
         body: JSON.stringify(updated)
       })
-      .then(res => res.json())
       .then(res => {
-        if (!res.success) {
+        if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) {
+          throw new Error('Response is not successful or not JSON (running on static host like Netlify)');
+        }
+        return res.json();
+      })
+      .then(res => {
+        if (res && !res.success) {
           console.error('Server sync failed:', res);
         }
       })
       .catch(err => {
-        console.error('Server sync connection error:', err);
+        console.warn('Server sync skipped (static host or backend offline):', err.message);
       });
 
       return updated;
@@ -268,7 +276,14 @@ export default function App() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(initialPortfolioData)
-    }).catch(err => console.error('Failed to reset on server:', err));
+    })
+    .then(res => {
+      if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) {
+        throw new Error('Not dynamic server environment');
+      }
+      return res.json();
+    })
+    .catch(err => console.warn('Failed to reset on server (running on static host):', err.message));
   };
 
   // Real-time custom microgrid variables computed in self-contained simulator
