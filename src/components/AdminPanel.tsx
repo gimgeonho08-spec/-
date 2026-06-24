@@ -51,20 +51,24 @@ export default function AdminPanel({ data, onSave, onReset, isOpen, onClose }: A
   const [newTool, setNewTool] = useState('');
   const [isResetConfirming, setIsResetConfirming] = useState(false);
 
-  // Synchronize editedData with parent-provided data when the second is loaded
+  // Synchronize editedData with parent-provided data ONLY when the modal is opened
   useEffect(() => {
     if (isOpen) {
       setEditedData(JSON.parse(JSON.stringify(data)));
       setIsResetConfirming(false);
     }
-  }, [isOpen, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
-  // Synchronize with parent state in real-time on every keystroke/change
+  // Synchronize with parent state in real-time on every keystroke/change safely
   useEffect(() => {
     if (isOpen && isAuthenticated && editedData) {
-      onSave(editedData);
+      // Double check to prevent redundant updates if structured data is identical
+      if (JSON.stringify(editedData) !== JSON.stringify(data)) {
+        onSave(editedData);
+      }
     }
-  }, [editedData, isOpen, isAuthenticated, onSave]);
+  }, [editedData, isOpen, isAuthenticated, onSave, data]);
 
   if (!isOpen) return null;
 
