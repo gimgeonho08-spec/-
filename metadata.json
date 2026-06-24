@@ -1,0 +1,6 @@
+{
+  "name": "한양이엔지의 인재",
+  "description": "한양이엔지가 지향하는 창의적이고 전문성 높은 최고의 전기공학 엔지니어 인재 포트폴리오",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
