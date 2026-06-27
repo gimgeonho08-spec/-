@@ -128,11 +128,7 @@ export const SmartLightSimulator: React.FC<{ targetCompany?: 'hynix' | 'hanyang'
       active: true
     });
     
-    if (targetCompany === 'hynix') {
-      addLog(`[초정밀 FAB ${zoneNum + 1}] 계통 순간 전압 SAG 변동 감지 ↗ 1차 능동 보상 회로 기동 (트리거 감쇄 ~${Math.round(Math.random() * 40 + 10)}μs)`, 'success');
-    } else {
-      addLog(`보행자 감지 ↗ 구역 ${zoneNum + 1} (초음파 ~${Math.round(Math.random() * 60 + 10)}cm)`, 'success');
-    }
+    addLog(`구역 ${zoneNum + 1} 감지 ↗ 유틸리티 정합 및 전력 능동 보상 회로 기동 (응답 감쇄 ~${Math.round(Math.random() * 40 + 10)}μs/cm)`, 'success');
   };
 
   // Reset simulator
@@ -148,25 +144,15 @@ export const SmartLightSimulator: React.FC<{ targetCompany?: 'hynix' | 'hanyang'
       z.timeSinceDetect = 0;
     });
     setZonesState([...zonesRef.current]);
-    if (targetCompany === 'hynix') {
-      addLog('SK하이닉스 FAB 고주파 필터 및 UPS 예비전력 능동 최적화 계통 초기화 완료', 'info');
-    } else {
-      addLog('마이크로그리드 시스템 제어 노드 초기화 완료 (PIR/초음파 원위치)', 'info');
-    }
+    addLog('초정밀 유틸리티 설비(CCSS) 및 마이크로그리드 제어 계통 초기화 완료', 'info');
   };
 
   // Continuous loop trigger
   useEffect(() => {
     startTimeRef.current = Date.now();
-    if (targetCompany === 'hynix') {
-      addLog('SK하이닉스 Cleanroom FAB 전력 계통 고조파 차단 필터 제어기 온라인', 'success');
-      addLog('반도체 설비 핀 매핑 완료: SG(D2,D4,D7,D8) | THD-Sensors(A5,D13) | ActiveFilter(D5,D6,D9,D10)', 'info');
-      addLog('SUPEX 무결점 연산 루프 시뮬레이션 가동 [역률 임계치: 98.7% 보상 대기]', 'info');
-    } else {
-      addLog('스마트 4구역 조명 시스템 모뎀 온라인', 'success');
-      addLog('핀 설정 정보: PIR(D2,D4,D7,D8) | Echo(A4,A5,D13,D3) | LED(D5,D6,D9,D10)', 'info');
-      addLog('자물쇠 방지 히스테리시스 루프 활성화 [CDS ON: 550lx | OFF: 450lx]', 'info');
-    }
+    addLog('공정 유틸리티 및 마이크로그리드 제어기 온라인', 'success');
+    addLog('설비 핀 제어 매핑 완료: Sensor(D2,D4,D7,D8) | Echo/THD(A4,A5,D13,D3) | Output/ActiveFilter(D5,D6,D9,D10)', 'info');
+    addLog('무결점 피드백 연산 루프 시뮬레이션 활성화 [역률 안정화 보상 대기]', 'info');
 
     // Run active loop
     const tick = () => {
@@ -246,21 +232,13 @@ export const SmartLightSimulator: React.FC<{ targetCompany?: 'hynix' | 'hanyang'
         // Log system state transitions
         if (z.state !== z.prevState) {
           stateChanged = true;
-          const labels = ['DAYTIME', 'STANDBY', 'ACTIVE'];
-          const hynixLabels = ['IDLE_BYPASS', 'MONITORING', 'ACTIVE_FILTERING'];
+          const labels = ['IDLE_BYPASS', 'STANDBY_MONITOR', 'ACTIVE_CONSUMPTION'];
           const types: ('warn' | 'info' | 'success')[] = ['warn', 'info', 'success'];
           
-          if (targetCompany === 'hynix') {
-            addLog(
-              `[FAB ${z.id + 1}] ${hynixLabels[z.prevState]} → ${hynixLabels[z.state]} | 계동역률=${Math.round(z.curPWM / 2.55 + 1)}% | 신호지연=${z.distance < 300 ? z.distance + 'μs' : '0'}`,
-              types[z.state]
-            );
-          } else {
-            addLog(
-              `[구역 ${z.id + 1}] ${labels[z.prevState]} → ${labels[z.state]} | PWM=${z.curPWM}% | 거리=${z.distance < 300 ? z.distance + 'cm' : '점검불필요'}`,
-              types[z.state]
-            );
-          }
+          addLog(
+            `[구역 ${z.id + 1}] ${labels[z.prevState]} → ${labels[z.state]} | PWM/출력=${z.curPWM}% | 감지응답=${z.distance < 300 ? z.distance + 'μs/cm' : '정상상태'}`,
+            types[z.state]
+          );
         }
       });
 
@@ -709,8 +687,8 @@ export const SmartLightSimulator: React.FC<{ targetCompany?: 'hynix' | 'hanyang'
           </div>
 
           <div className="border-t border-zinc-900 pt-2.5 flex justify-between items-center text-[9px] text-zinc-500 font-mono">
-            <span>{targetCompany === 'hynix' ? 'SYSTEM: ACTIVE FILTER MCU' : 'MCU: ATMEGA328P'}</span>
-            <span>{targetCompany === 'hynix' ? 'THD REDUCTION: -84.2% / PF IMPROVED TO 99.1%' : 'SYSTEM SAVINGS EFFECT: 39.4% CO2 DECREASE'}</span>
+            <span>MCU: ATMEGA328P / ACTIVE FILTER CONTROLLER</span>
+            <span>THD REDUCTION: -84.2% / CO2 SAVINGS: 39.4%</span>
           </div>
         </div>
 

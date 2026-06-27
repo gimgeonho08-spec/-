@@ -300,17 +300,10 @@ export default function App() {
     return (
       <section className="pt-8 pb-4 relative" id="hero">
         <div className="text-center space-y-6 max-w-4xl mx-auto">
-          {targetCompany === 'hynix' ? (
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-[#FF5A00] to-[#E0115F] text-white text-xs font-bold rounded-full tracking-wide shadow-md">
-              <Zap className="w-3.5 h-3.5 animate-bounce" />
-              SK하이닉스 [설비기술 / Utility Engineering] 추천 인재 제안
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-black text-white text-xs font-bold rounded-full tracking-wide">
-              <Zap className="w-3.5 h-3.5" />
-              한양이엔지 가치 맞춤형 전기공학 및 설비 자동화 추천 인재
-            </span>
-          )}
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-black text-white text-xs font-bold rounded-full tracking-wide">
+            <Zap className="w-3.5 h-3.5 animate-pulse" />
+            전기공학 및 반도체·유틸리티 설비 자동화 추천 인재 제안
+          </span>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-black font-display tracking-tight leading-tight" id="hero-title">
             {data.hero.title}
@@ -353,37 +346,17 @@ export default function App() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="col-span-1 lg:col-span-8 space-y-6">
-              {targetCompany === 'hynix' ? (
-                <span className="inline-block px-3.5 py-1 bg-gradient-to-r from-[#FF5A00]/25 to-[#E0115F]/25 text-[#FF5A00] text-[10px] font-mono font-bold uppercase tracking-widest border border-[#FF5A00]/40 rounded-full">
-                  • READY FOR SK HYNIX (SK하이닉스 신입 설비기술 인재 제안)
-                </span>
-              ) : (
-                <span className="inline-block px-3.5 py-1 bg-zinc-800 text-[#FAF9F6] text-[10px] font-mono font-bold uppercase tracking-widest border border-zinc-700 rounded-full">
-                  • READY FOR HANYANG ENG (한양이엔지 신입 인재 제안)
-                </span>
-              )}
-              {targetCompany === 'hynix' ? (
-                <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight leading-[1.25] sm:leading-[1.2] text-white">
-                  반도체 Fab 전력 계통 최적화 및 <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5A00] to-[#E0115F]">무결점 설비 자동화</span>를 실현할 {data.aboutMe.name}입니다.
-                </h2>
-              ) : (
-                <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight leading-[1.25] sm:leading-[1.2] text-white">
-                  회로 계통 설계와 제어 데이터를 결합하는 <br />
-                  <span className="text-zinc-200">한양이엔지 최적화 인재</span>, {data.aboutMe.name}입니다.
-                </h2>
-              )}
-              {targetCompany === 'hynix' ? (
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-sans font-medium">
-                  SK하이닉스의 최고 신뢰성 반도체 초정밀 Cleanroom을 위한 고품질 전력 시스템 공급망과 고조파 왜곡 억제 장비를 가동할 준비를 갖추었습니다.
-                  스마트 메인 제어 캡스톤, 한전KPS 발전 예비 계통 정비 실무 검증 능력 및 글로벌 수준의 협동력을 기반으로 초격차 반도체 무재해 설비 공정을 완벽 이행하겠습니다.
-                </p>
-              ) : (
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-sans">
-                  반도체 및 디스플레이 핵심 유틸리티 설비(CCSS - 중앙화학물질공급장치)와 고정밀 클린룸 배관 제어 분야의 발전을 견인하겠습니다. 
-                  스마트그리드 캡스톤, 한전KPS 인턴, KOICA ESG 활동을 통해 전력 회로 설계부터 펌웨어 코딩, 문서화까지 전천후 실무 기량을 완성했습니다.
-                </p>
-              )}
+              <span className="inline-block px-3.5 py-1 bg-zinc-800 text-[#FAF9F6] text-[10px] font-mono font-bold uppercase tracking-wider border border-zinc-700 rounded-full">
+                • SEMICONDUCTOR & PLANT ELECTRICAL AUTOMATION ENGINEER
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold tracking-tight leading-[1.25] sm:leading-[1.2] text-white">
+                반도체 Fab 전력 최적화 및 <br />
+                <span className="text-zinc-300">유틸리티 설비 자동화</span>를 실현할 {data.aboutMe.name}입니다.
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-sans font-medium">
+                반도체 초정밀 Cleanroom을 위한 고품질 전력 계통 최적화 설계와 CCSS(중앙화학물질공급장치)를 비롯한 고신뢰성 유틸리티 공급 자동화 설비 분야의 기술 발전을 이끌 준비가 되었습니다.
+                스마트 전력 제어 캡스톤, 한전KPS 발전 예비 설비 정비 실무 검증 능력 및 KOICA ESG 봉사 활동을 통해 설계 역량부터 실무 정합성, 임베디드 PLC 자동 제어 코딩까지 전천후 실력을 완성했습니다.
+              </p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <button 
                   onClick={() => handleScrollTo('about')}
@@ -396,7 +369,7 @@ export default function App() {
                   onClick={() => handleScrollTo('project')}
                   className="px-6 py-3 bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold border border-zinc-700 rounded-xl transition-all active:scale-95 inline-flex items-center gap-1.5"
                 >
-                  {targetCompany === 'hynix' ? 'FAB 전력 최적 가동 Sandbox' : '스마트 가로등 Sandbox 가동'}
+                  스마트 제어 및 전력 Sandbox 가동
                   <Cpu className="w-4 h-4" />
                 </button>
               </div>
@@ -407,15 +380,15 @@ export default function App() {
               <div className="w-44 h-[230px] sm:w-48 sm:h-[250px] bg-zinc-900 border border-zinc-800 hover:border-zinc-700 rounded-2xl relative overflow-hidden group shadow-2xl transition-all duration-300 flex flex-col items-center justify-center p-1">
                 {data.aboutMe.imageUrl ? (
                   <div className="w-full h-full relative rounded-xl overflow-hidden">
-                    <img 
+                     <img 
                       src={data.aboutMe.imageUrl} 
                       alt="증명사진" 
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-3 pt-8 flex flex-col items-center justify-end text-center">
-                      <span className="text-[9px] text-zinc-405 font-bold uppercase tracking-wider font-mono">
-                        {targetCompany === 'hynix' ? 'SK HYNIX APPLICANT' : 'HANYANG ENG APPLICANT'}
+                      <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider font-mono">
+                        EE & CONTROL SYSTEMS APPLICANT
                       </span>
                       <span className="text-xs text-white font-extrabold mt-0.5">{data.aboutMe.name}</span>
                     </div>
@@ -495,11 +468,7 @@ export default function App() {
         {/* Quick Bento Pages Link Grid - Satisfies '각 메뉴에 해당하는 페이지도 만들어줘' */}
         <div className="space-y-4">
           <div>
-            {targetCompany === 'hynix' ? (
-              <h4 className="text-xs font-bold text-black font-mono uppercase tracking-widest">• SK하이닉스 전용 인재 포털 메뉴</h4>
-            ) : (
-              <h4 className="text-xs font-bold text-black font-mono uppercase tracking-widest">• 한양이엔지 전용 인재 포털 메뉴</h4>
-            )}
+            <h4 className="text-xs font-bold text-black font-mono uppercase tracking-widest">• 맞춤형 엔지니어링 인재 포털 메뉴</h4>
             <p className="text-xs text-zinc-500 mt-1">원하시는 카테고리를 클릭하면 해당 섹션으로 부드럽게 스크롤됩니다.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="home-bento-navigation-links">
@@ -1220,17 +1189,8 @@ export default function App() {
       <section id="why" className="scroll-mt-24 space-y-12">
         <div className="text-center space-y-2">
           <span className="text-xs font-bold text-black uppercase tracking-widest font-mono">SECTION 07 / RECRUITER OUTLOOK</span>
-          {targetCompany === 'hynix' ? (
-            <>
-              <h3 className="text-3xl font-black text-black">왜 이 엔지니어를 SK하이닉스에 모셔야 하는가?</h3>
-              <p className="text-sm text-zinc-500 max-w-xl mx-auto">SK하이닉스가 추구하는 초격차 메모리 기술과 무재해/초안정성 가치에 부합하는 역량 도킹 분석</p>
-            </>
-          ) : (
-            <>
-              <h3 className="text-3xl font-black text-black">왜 이 엔지니어를 한양이엔지에 모셔야 하는가?</h3>
-              <p className="text-sm text-zinc-500 max-w-xl mx-auto">한양이엔지가 추구하는 가치에 명확히 도킹하는 최적화된 채용이유 분석</p>
-            </>
-          )}
+          <h3 className="text-3xl font-black text-black">왜 이 엔지니어를 채용해야 하는가?</h3>
+          <p className="text-sm text-zinc-500 max-w-xl mx-auto">첨단 산업군이 요구하는 공정 장비 신뢰성과 안전 가치에 완벽히 도킹하는 역량 매칭 분석</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" id="why-hire-grid">
@@ -1579,25 +1539,12 @@ export default function App() {
         <div className="max-w-3xl w-full bg-white border border-zinc-200 rounded-3xl p-8 relative z-10 card-glow text-center space-y-8 shadow-sm" id="contact-panel-box">
           <div className="space-y-2">
             <span className="text-xs font-bold text-black uppercase tracking-widest font-mono">SECTION 09 / REACH ME</span>
-            {targetCompany === 'hynix' ? (
-              <>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight leading-snug">
-                  SK하이닉스의 전력 제어 신뢰성을 극대화할<br className="hidden sm:inline" /> 조력자를 채용하세요
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 max-w-xl mx-auto font-medium leading-relaxed tracking-normal">
-                  초정밀 반도체 Fab 전력 계통 보상, 고효율 예비전력 자동 시퀀스 및<br className="hidden sm:inline" /> 설비 제어 알고리즘의 최전선에 기여하겠습니다.
-                </p>
-              </>
-            ) : (
-              <>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight leading-snug">
-                  한양이엔지의 생산성과 신뢰를 높일<br className="hidden sm:inline" /> 조력자를 채용하세요
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 max-w-xl mx-auto leading-relaxed tracking-normal">
-                  초고순도 제어 설비, 송배전 유틸리티,<br className="hidden sm:inline" /> CCSS 하드웨어 제어 시퀀스의 최전선에 기여하겠습니다.
-                </p>
-              </>
-            )}
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-black tracking-tight leading-snug">
+              반도체 유틸리티 설비와 전력 계통 제어 신뢰성을 극대화할<br className="hidden sm:inline" /> 조력자를 채용하세요
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-600 max-w-xl mx-auto font-medium leading-relaxed tracking-normal">
+              초정밀 반도체 Cleanroom 전력 계통 보상, 고효율 예비전력 자동 시퀀스 및<br className="hidden sm:inline" /> CCSS(화학물질 유틸리티) 자동 설비 제어 알고리즘의 최전선에 기여하겠습니다.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
@@ -1651,7 +1598,7 @@ export default function App() {
           </div>
 
           <p className="text-[10px] text-zinc-400 font-mono">
-            © 2026 {data.aboutMe.name}. All Rights Reserved. Built as a fully dynamic compliant portfolio for {targetCompany === 'hynix' ? 'SK HYNIX' : 'HANYANG ENG'}.
+            © 2026 {data.aboutMe.name}. All Rights Reserved. Built as a fully dynamic compliant Engineering Portfolio.
           </p>
         </div>
       </section>
@@ -1666,28 +1613,19 @@ export default function App() {
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#E5E5EA] transition-all shadow-2xs" id="main-navigation">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {targetCompany === 'hynix' ? (
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF5A00] to-[#E0115F] text-white flex flex-col items-center justify-center font-sans font-black text-xs tracking-tighter relative overflow-hidden group border border-orange-500 shadow-sm">
-                <span className="leading-none flex items-center justify-center text-[10px]">SK</span>
-                <span className="text-[8px] font-bold tracking-tight opacity-90 leading-none mt-0.5">hynix</span>
-              </div>
-            ) : (
-              <div className="w-10 h-10 rounded-xl bg-black text-white flex flex-col items-center justify-center font-sans font-black text-xs tracking-tighter relative overflow-hidden group border border-zinc-800">
-                <span className="leading-none flex items-center justify-center">한양</span>
-                <span className="text-[7.5px] font-bold tracking-normal opacity-90 leading-none mt-0.5">ENG</span>
-              </div>
-            )}
+            <div className="w-10 h-10 rounded-xl bg-black text-white flex flex-col items-center justify-center font-sans font-black text-xs tracking-tighter relative overflow-hidden group border border-zinc-800">
+              <span className="leading-none flex items-center justify-center text-[10px]">전기</span>
+              <span className="text-[8px] font-bold tracking-normal opacity-90 leading-none mt-0.5">제어</span>
+            </div>
             <div>
               <h1 className="text-sm font-black text-black font-display tracking-tight flex items-center gap-1.5">
-                {targetCompany === 'hynix' ? 'SK하이닉스의 인재' : '한양이엔지의 인재'}{' '}
-                <span className={`text-[9px] px-2 py-0.5 rounded font-mono font-extrabold ${targetCompany === 'hynix' ? 'bg-gradient-to-r from-[#FF5A00] to-[#E0115F] text-white shadow-xs' : 'bg-black text-white'}`}>
+                전기 및 제어 엔지니어{' '}
+                <span className="text-[9px] px-2 py-0.5 rounded font-mono font-extrabold bg-black text-white">
                   {data.aboutMe.name}
                 </span>
               </h1>
               <p className="text-[11px] text-zinc-500 font-mono hidden sm:block">
-                {targetCompany === 'hynix' 
-                  ? 'SK Hynix Target: Semiconductor Utilities & Yield Backup Power Automation' 
-                  : 'Hanyang ENG Ready: Plant Facility & Automated Control Engineer'}
+                Semiconductor Utilities & Automated Control Systems Engineer
               </p>
             </div>
           </div>
@@ -1710,9 +1648,7 @@ export default function App() {
                 onClick={() => handleScrollTo(link.id)}
                 className={`text-[11px] xl:text-xs font-semibold tracking-wide whitespace-nowrap px-3.5 py-1.5 rounded-full transition-all duration-200 ${
                   activeNav === link.id
-                    ? targetCompany === 'hynix'
-                      ? 'bg-gradient-to-r from-[#FF5A00] to-[#E0115F] text-white shadow-xs font-bold'
-                      : 'bg-black text-white shadow-xs font-bold'
+                    ? 'bg-black text-white shadow-xs font-bold'
                     : 'text-zinc-500 hover:text-black hover:bg-zinc-200/50'
                 }`}
               >

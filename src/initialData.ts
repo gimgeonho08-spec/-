@@ -95,7 +95,7 @@ export const initialPortfolioData: PortfolioData = {
   ],
   whyHireMe: [
     { id: "why-1", title: "확립된 규범 중심의 수작업 검증 능력", description: "한전KPS 현장 경험을 통해 하찮아 보이는 원단위 데이터 및 도면의 미세한 모순을 성실히 교차 검증하는 인재입니다." },
-    { id: "why-2", title: "반도체 Fab 맞춤형 전력 최적화 역량", description: "SK하이닉스 Cleanroom 설비와 한양이엔지 CCSS 공급 장치의 전원 정합 및 순간 Sagar 전압 차단 제어 능력을 즉시 발휘할 수 있습니다." },
+    { id: "why-2", title: "반도체 Fab 맞춤형 전력 최적화 역량", description: "반도체 Cleanroom 초정밀 설비와 고품질 화학물질 유틸리티 공급 장치(CCSS)의 전원 정합 및 순간 Sagar 전압 차단 제어 능력을 즉시 발휘할 수 있습니다." },
     { id: "why-3", title: "C/C++ 및 PLC 하이브리드 제어 정합성", description: "회로 하드웨어 설계뿐 아니라 내부 임베디드 펌웨어 수준의 알고리즘 코딩, 실시간 가상 제어 루프를 직접 설계 가능한 전천후 실력자입니다." },
     { id: "why-4", title: "성찰하는 엔지니어의 성장 습관", description: "실패 이탈 데이터나 오류 기록들을 버리지 않고 하나의 지식 데이터베이스로 구조화하여 미래 오동작 예방에 자산화하는 습관을 지녔습니다." }
   ],
