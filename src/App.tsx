@@ -183,6 +183,7 @@ export default function App() {
   // Modern Cloud Sync & Local Storage hybrid loading
   useEffect(() => {
     const fetchSharedPortfolio = async () => {
+      const CURRENT_VERSION = '2026.06.24.v1';
       try {
         const response = await fetch('/api/portfolio');
         if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
@@ -191,6 +192,7 @@ export default function App() {
             const sanitized = sanitizeAndProcessData(cloudData);
             setData(sanitized);
             localStorage.setItem('electrical_portfolio_data', JSON.stringify(sanitized));
+            localStorage.setItem('electrical_portfolio_version', CURRENT_VERSION);
             return;
           }
         } else {
@@ -200,22 +202,17 @@ export default function App() {
         console.warn('Could not contact full-stack server for sync (running on static host like Netlify):', err);
       }
 
-      // Local storage hybrid fallback
+      // Local storage hybrid fallback (robust migration over hard reset to preserve user edits)
       const saved = localStorage.getItem('electrical_portfolio_data');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.aboutMe) {
-            // Auto-migrate if the cached name is the old placeholder '김건우'
-            if (parsed.aboutMe.name === '김건우') {
-              console.log('Migrating from old template placeholder data to updated baseline');
-              localStorage.removeItem('electrical_portfolio_data');
-            } else {
-              const sanitized = sanitizeAndProcessData(parsed);
-              setData(sanitized);
-              localStorage.setItem('electrical_portfolio_data', JSON.stringify(sanitized));
-              return;
-            }
+            const sanitized = sanitizeAndProcessData(parsed);
+            setData(sanitized);
+            localStorage.setItem('electrical_portfolio_data', JSON.stringify(sanitized));
+            localStorage.setItem('electrical_portfolio_version', CURRENT_VERSION);
+            return;
           }
         } catch (e) {
           console.error('Error parsing local storage backup:', e);
@@ -224,6 +221,8 @@ export default function App() {
 
       // Initial data first-run setup
       setData(initialPortfolioData);
+      localStorage.setItem('electrical_portfolio_version', CURRENT_VERSION);
+      localStorage.setItem('electrical_portfolio_data', JSON.stringify(initialPortfolioData));
     };
 
     fetchSharedPortfolio();
@@ -236,6 +235,7 @@ export default function App() {
       // Save locally first for fast instant response
       try {
         localStorage.setItem('electrical_portfolio_data', JSON.stringify(updated));
+        localStorage.setItem('electrical_portfolio_version', '2026.06.24.v1');
       } catch (err) {
         console.error('Failed to save to localStorage:', err);
       }

@@ -51,13 +51,13 @@ export default function AdminPanel({ data, onSave, onReset, isOpen, onClose }: A
   const [newTool, setNewTool] = useState('');
   const [isResetConfirming, setIsResetConfirming] = useState(false);
 
-  // Synchronize editedData with parent-provided data when the second is loaded
+  // Synchronize editedData with parent-provided data when first opened or authenticated
   useEffect(() => {
     if (isOpen) {
       setEditedData(JSON.parse(JSON.stringify(data)));
       setIsResetConfirming(false);
     }
-  }, [isOpen, data]);
+  }, [isOpen, isAuthenticated]);
 
   // Synchronize with parent state in real-time on every keystroke/change
   useEffect(() => {
